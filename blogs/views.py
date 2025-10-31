@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import Blog,Post
 
-# Create your views here.
+def index(request):
+    """Home page for Blog."""
+    return render(request,'blogs/index.html')
