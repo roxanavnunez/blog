@@ -1,0 +1,18 @@
+{% extends 'blogs/base.html' %}
+
+{% block content %}
+  <p>Topic: {{ topic }}</p>
+
+  <p>Posts:</p>
+  <ul>
+    {% for post in posts %}
+     <li>
+        <p>{{ post }}</p>
+        <p>{{post.date_last_modified|date:"M d, Y H:i" }}</p>
+     </li>
+    {% empty %}
+      <li>There are no posts for this topic yet.</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}
