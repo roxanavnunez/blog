@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Blog,Post
+from .models import Topic,Post
 
 def index(request):
     """Home page for Blog."""
