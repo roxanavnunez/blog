@@ -10,3 +10,10 @@ def topics(request):
     topics = Topic.objects.order_by('date_last_modified')
     context = {'topics': topics}
     return render(request, 'blogs/topics.html', context)
+
+def topic(request, topic_id):
+    """Show posts for each topic"""
+    topic = Topic.objects.get(id=topic_id)
+    titles = topic.title_set.order_by('-date_last_modified')
+    context = {'topic': topic, 'titles': titles}
+    return render(request, 'blogs/topic.html', context)
