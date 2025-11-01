@@ -1,6 +1,15 @@
 from django.contrib import admin
-from .models import Blog, Post
+from .models import Topic, Post
 
-admin.site.register(Blog)
-admin.site.register(Post)
+class PostInLine(admin.TabularInline):
+    """Post should be editaable inline"""
+    model = Post
+    extra = 1
+
+class TopicAdmin(admin.ModelAdmin):
+    """Personalized setting for Topic"""
+    inlines = [PostInLine]
+
+admin.site.register(Topic, TopicAdmin)
+
 
