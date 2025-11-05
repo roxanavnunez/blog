@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Topic,Post
 
 def index(request):
@@ -13,7 +13,13 @@ def topics(request):
 
 def topic(request, topic_id):
     """Show posts for each topic"""
-    topic = Topic.objects.get(id=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
     posts = topic.post_set.order_by('-date_last_modified')
     context = {'topic': topic, 'posts': posts}
     return render(request, 'blogs/topic.html', context)
+
+def post(request, post_id):
+    """Show the content of each post """
+    post_object = get_object_or_404(Post, id=post_id)
+    context = {'post': post_object}
+    return render(request,'blogs/post.html', context)
