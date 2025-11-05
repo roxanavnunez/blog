@@ -19,7 +19,5 @@ class Post(models.Model):
     date_last_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        """Return a simple string representing the post."""
-        if len(self.title) > 50:
-            return f"{self.title[:50]}..."
+        """Return the title of the post."""
         return f"{self.title}"
