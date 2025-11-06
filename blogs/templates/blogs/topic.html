@@ -8,7 +8,10 @@
     {% for post in posts %}
      <li>
         <p><a href="{% url 'blogs:post' post.id %}">{{ post }}</a></p>
-        <p>{{post.date_last_modified|date:"M d, Y H:i" }}</p>
+        <p>
+            {{post.date_last_modified|date:"M d, Y H:i" }} |
+            <a href="{% url 'blogs:edit_post' post.id %}">Edit</a>
+        </p>
      </li>
     {% empty %}
       <li>There are no posts for this topic yet.</li>
