@@ -1,7 +1,8 @@
 {% extends 'blogs/base.html' %}
 
 {% block content %}
-  <p>Topic: {{ post.topic }}</p>
+  <p>Topic: <a href="{% url 'blogs:topic' post.topic.id %}">{{ post.topic }}</a>
+  </p>
 
   <p>Post: {{ post.title }}</p>
 
