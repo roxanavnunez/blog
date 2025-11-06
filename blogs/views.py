@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Topic,Post
+from .forms import TopicForm, PostForm
 
 def index(request):
     """Home page for Blog."""
@@ -23,3 +24,18 @@ def post(request, post_id):
     post_object = get_object_or_404(Post, id=post_id)
     context = {'post': post_object}
     return render(request,'blogs/post.html', context)
+
+def edit_post(request, post_id):
+    """Edit an existing post"""
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('blogs:post', post_id=post.id)
+    else:
+        form = PostForm(instance=post)
+    
+    context = {'form': form, 'post': post}
+    return render(request, 'blogs/edit_post.html', context)
