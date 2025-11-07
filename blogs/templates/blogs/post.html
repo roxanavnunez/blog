@@ -1,15 +1,21 @@
 {% extends 'blogs/base.html' %}
 
 {% block content %}
-  <p>Topic: <a href="{% url 'blogs:topic' post.topic.id %}">{{ post.topic }}</a>
-  </p>
+  <p>Topic: {{ post.topic }}</p>
 
-  <p>Post: {{ post.title }}</p>
+  <p>Title: {{ post.title }}</p>
 
   <p>{{ post.text|linebreaks }}</p>
   <p>{{post.date_last_modified|date:"M d, Y H:i" }}</p>
   
   <p>
     <a href="{% url 'blogs:edit_post' post.id %}">Edit this post</a>
+  </p>
+  <p>
+    <a href="{% url 'blogs:topic' post.topic.id %}">Back to {{ post.topic }} 
+        posts</a>
+  </p>
+  <p>
+    <a href="{% url 'blogs:topics' %}">Back to Topics</a>
   </p>
 {% endblock content %}
