@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Topic,Post
-from .forms import TopicForm, PostForm
+from .forms import PostForm
 
 def index(request):
     """Home page for Blog."""
