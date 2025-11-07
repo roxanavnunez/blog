@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Topic,Post
-from .forms import PostForm
+from .forms import PostForm, TopicForm
 
 def index(request):
     """Home page for Blog."""
@@ -39,3 +39,18 @@ def edit_post(request, post_id):
     
     context = {'form': form, 'post': post}
     return render(request, 'blogs/edit_post.html', context)
+
+def edit_topic(request, topic_id):
+    """Edit an existing topic"""
+    topic = get_object_or_404(Topic, id=topic_id)
+
+    if request.method == 'POST':
+        form = TopicForm(request.POST, instance=topic)
+        if form.is_valid():
+            form.save()
+            return redirect('blogs:topic', topic_id=topic.id)
+    else:
+        form = TopicForm(instance=topic)
+    
+    context = {'form': form, 'topic': topic}
+    return render(request, 'blogs/edit_topic.html', context)
