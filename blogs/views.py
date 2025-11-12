@@ -54,3 +54,18 @@ def edit_topic(request, topic_id):
     
     context = {'form': form, 'topic': topic}
     return render(request, 'blogs/edit_topic.html', context)
+
+def new_topic(request):
+    """Add a new topic"""
+    if request.method == 'POST':
+        form = TopicForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('blogs:topics')
+    else:
+        form = TopicForm()
+    
+    context = {'form':form}
+    return render(request, 'blogs/new_topic.html', context)
+
+    
