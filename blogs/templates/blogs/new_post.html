@@ -1,0 +1,26 @@
+{% extends 'blogs/base.html' %}
+
+{% block content %}
+<p>Add a new post</p>
+
+<form method="post">
+    {% csrf_token %}
+    <p>Topic: {{ topic }}</p>
+
+    <p>
+      <label for="id_title">Title:</label><br>
+      {{ form.title }}
+    </p>
+
+    <p>
+      <label for="id_text">Content:</label><br>
+      {{ form.text }}
+    </p>
+
+    <p>
+      <button type="submit">Save Changes</button>
+        <a href="{% url 'blogs:topic' topic.id %}">Cancel</a>
+    </p>
+</form>
+
+{% endblock %}
