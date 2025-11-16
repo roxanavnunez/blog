@@ -20,6 +20,7 @@
       <li>There are no posts for this topic yet.</li>
     {% endfor %}
   </ul>
+  <p><a href="{% url 'blogs:new_post' topic.id %}">Add a new post</a></p>
 
   <p><a href="{% url 'blogs:topics' %}">Back to Topics</a></p>
 
