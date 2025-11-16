@@ -68,4 +68,21 @@ def new_topic(request):
     context = {'form':form}
     return render(request, 'blogs/new_topic.html', context)
 
+def new_post(request, topic_id):
+    """Add a new post"""
+    topic = get_object_or_404(Topic, id=topic_id)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.topic = topic
+            new_post.save()
+            return redirect('blogs:topic', topic_id=topic.id)
+    else:
+        form = PostForm()
+    
+    context = {'form':form, 'topic':topic}
+    return render(request, 'blogs/new_post.html', context)
+
     
